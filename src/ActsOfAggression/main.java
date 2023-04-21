@@ -23,6 +23,7 @@ public class main {
             String n = scnr.next();
             System.out.println("Starting Client");
             client1 = new Client("127.0.0.1",9000,n);
+            // Will look like this when ready to push! client1.in.readUTF();
             driver = new Thread(new Client("127.0.0.1",9000,n));
             
         } else if (ech.compareTo("S") == 0) {
