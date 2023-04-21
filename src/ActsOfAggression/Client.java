@@ -5,6 +5,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Client implements Runnable
 {
@@ -14,6 +15,7 @@ public class Client implements Runnable
     Socket con;
     DataInputStream in;
     DataOutputStream out;
+    Scanner scnr;
     public Client(String i, int p, String n)
     {
         name = n;
@@ -31,6 +33,10 @@ public class Client implements Runnable
             System.out.println("ERROR CONNECTING AS A CLIENT! "+e.getMessage());
         }
     }
+
+    Socket getCon(){
+        return con;
+    }
     @Override
     public void run()
     {
@@ -38,12 +44,17 @@ public class Client implements Runnable
         {
             try
             {
-                Random r = new Random();
-                String nm = "";
-                for(int i =0; i < 10; i ++)
-                {
-                    nm += (char)r.nextInt(); //A-Z
-                }
+                //Instead of waiting for the other client, await for five cards! Then when the server dists cards,
+                //we know another client is connected
+                scnr = new Scanner(System.in);
+                //Then do-while and select card, send card, play again?
+                //send response
+                //Wait for result (points calculation)
+                //Print result
+                //Done
+                System.out.println("Anything to say?");
+                //Could possibly send a serializable object with data, either way
+                String nm = scnr.nextLine();
                 System.out.println("Sending Message: "+nm+" <"+name+">");
                 out.writeUTF(nm+" <"+name+">");
                 System.out.println("Read from server! "+in.readUTF());

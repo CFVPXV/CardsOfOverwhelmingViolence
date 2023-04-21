@@ -10,7 +10,9 @@ public class Listener implements Runnable
 {
     ServerSocket serve;
     int maxNumber;
+    int numOn;
     ExecutorService connections;
+    Socket c;
     public Listener(int port, int max)
     {
         connections = Executors.newFixedThreadPool(max);
@@ -29,10 +31,16 @@ public class Listener implements Runnable
     {
         while(true)
         {
-            System.out.println("Listening for connections!");
+            System.out.println("Waiting for players...");
             try
             {
-                Socket c = serve.accept();
+                if(numOn < 2) {
+                    c = serve.accept();
+                    numOn++;
+                }
+                else{
+                    throw new RuntimeException("Game has already begun...");
+                }
                 System.out.println("Client recieved, spawning new server thread!");
                 connections.execute(new Server(c));
             }

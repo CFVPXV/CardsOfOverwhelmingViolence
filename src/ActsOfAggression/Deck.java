@@ -8,6 +8,8 @@ import java.util.Stack;
 
 public class Deck {
 
+    //Remake this to a class which is serializable?
+
     private String[] theDeck;
     private boolean isIn[];
     Random rand;
@@ -58,6 +60,10 @@ public class Deck {
         for(int i = 0; i < 18; i++){
             System.out.println(distroStack.pop());
         }
+    }
+
+    Stack<String> getDistroStack(){
+        return distroStack;
     }
 
 }
